@@ -2,7 +2,6 @@ import javax.swing.*;
 
 public class TourneamentRoundUI {
     private final GameUI[] gamesUI = new GameUI[Configuration.UI_NUMBER_OF_BOARDS];
-//    private TourneamentRound tourneamentRound;
     private final JPanel gamesContainerPanel = new JPanel();
 
     public TourneamentRoundUI()  {
@@ -13,7 +12,7 @@ public class TourneamentRoundUI {
             gamesContainerPanel.add(gamesUI[i].panel());
         }
 
-        TourneamentRound tr = new TourneamentRound(1);
+        TourneamentRound tr = TourneamentRound.create(1);
         tr.setUIView(this);
     }
 

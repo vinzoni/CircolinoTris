@@ -4,7 +4,6 @@ public class Tourneament implements Runnable {
 
     private TourneamentUI tourneamentUI;
     private boolean stopGames = false;
-//    private int gameNumber = 0;
     private int roundNumber = 0;
 
     public void setUI_View(TourneamentUI tourneamentUI) {
@@ -22,7 +21,7 @@ public class Tourneament implements Runnable {
 
                 if (roundNumber == Configuration.MAX_NUMBER_OF_ROUNDS) this.stopGames = true;
 
-                TourneamentRound tr = new TourneamentRound(roundNumber);
+                TourneamentRound tr = TourneamentRound.create(roundNumber);
                 tr.setUIView(tourneamentUI.tourneamentRoundUI());
                 tr.run();
 

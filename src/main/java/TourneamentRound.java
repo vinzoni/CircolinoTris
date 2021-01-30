@@ -5,14 +5,21 @@ public class TourneamentRound {
 
     public static int GAMES_PER_ROUND = Configuration.players.length / 2;
     private static int nextGameNumber = 1;
+    private static TourneamentRound firstRound; // Primo turno precalcolato a beneficio dell'inizializzazione della UI.
+
+    static {
+        firstRound = new TourneamentRound(1);
+    }
 
     private final List<PairingSystemSimilarRating.PlayersPair> pairings;
     private final Game[] games = new Game[GAMES_PER_ROUND];
     private TourneamentRoundUI tourneamentRoundUI;
 
+    public static TourneamentRound create(int roundNumber) {
+        return roundNumber == 1 ? firstRound : new TourneamentRound(roundNumber);
+    }
 
-    public TourneamentRound(int roundNumber) {
-        if (roundNumber == 1) nextGameNumber = 1;
+    private TourneamentRound(int roundNumber) {
 
         pairings = Configuration.paringSystem.pairings(roundNumber);
 
