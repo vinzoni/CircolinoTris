@@ -7,6 +7,8 @@ public class TourneamentUI {
     private final RatingListUI ratingListUI = new RatingListUI();
     private final TourneamentRoundUI tourneamentRoundUI = new TourneamentRoundUI();
     private final ClockUI clockUI = new ClockUI();
+    private final JButton newGameButton = new JButton();
+    private final JButton lastGameButton = new JButton();
     private boolean tourneamentRunning =  false;
 
     public TourneamentUI(Tourneament tourneament) {
@@ -62,8 +64,6 @@ public class TourneamentUI {
 
     private JPanel createCommandPanel() {
         JPanel commandPanel = new JPanel();
-        final JButton newGameButton = new JButton();
-        final JButton lastGameButton = new JButton();
 
         newGameButton.setText("Start Games");
         newGameButton.addActionListener(
@@ -117,6 +117,9 @@ public class TourneamentUI {
         tourneamentInfoLabel.setText(Configuration.TOURNEAMENT_NAME + " - Turno " + infoRunningRound);
 
         ratingListUI.redraw();
+
+        if (roundNumber == Configuration.MAX_NUMBER_OF_ROUNDS) newGameButton.setEnabled(false);
+
     }
 
     public void closeTourneament(int roundNumber) {

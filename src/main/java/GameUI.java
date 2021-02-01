@@ -27,7 +27,6 @@ public class GameUI {
 
         boardUI = new BoardUI();
         c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
         c.weighty = 0.70;
         c.gridx = 0;
         c.gridy = 1;
