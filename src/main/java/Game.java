@@ -1,16 +1,16 @@
 public class Game implements Runnable{
 
     private GameUI gameUI = null;
-    private final int gameNumber;
+    private final int boardNumber;
     private final Board board = new Board();
     private final Player player1;
     private final Player player2;
     private String scoresheet = "";
 
-    public Game(Player player1, Player player2, int gameNumber) {
+    public Game(Player player1, Player player2, int boardNumber) {
         this.player1 = player1;
         this.player2 = player2;
-        this.gameNumber = gameNumber;
+        this.boardNumber = boardNumber;
     }
 
     public void setGameUI (GameUI gameUI) {
@@ -20,7 +20,6 @@ public class Game implements Runnable{
     @Override
     public void run() {
         while (board.status() == Board.Status.RUNNING) {
-//            Player playerToMove = board.playerToMove(player1, player2);
             Player playerToMove = board.playerToMove() == Board.PlayerToMove.FIRST_PLAYER ? player1 : player2;
             try {
                 String move = playerToMove.playAMove(board);
@@ -64,12 +63,10 @@ public class Game implements Runnable{
         player2.updateEloRating(-variazioneElo);
     }
 
-
-    //    public int moveCount() { return board.moveCount(); }
     public Board board() { return board; }
     public Board.Status status() { return board.status(); }
     public Player player1() { return player1; }
     public Player player2() { return player2; }
-    public int gameNumber() { return gameNumber; }
+    public int boardNumber() { return boardNumber; }
     public String scoresheet() { return scoresheet; }
 }

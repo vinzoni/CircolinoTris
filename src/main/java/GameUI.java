@@ -81,10 +81,10 @@ public class GameUI {
 
     private void redrawGameStatus() {
         switch (game.status()) {
-            case RUNNING -> gameInfoLabel.setText("Partita " + game.gameNumber() + " ...");
-            case DRAW -> gameInfoLabel.setText("Partita " + game.gameNumber() + ": patta");
-            case X_WON -> gameInfoLabel.setText("Partita "  + game.gameNumber() + ": " + player1.name());
-            case O_WON -> gameInfoLabel.setText("Partita "  + game.gameNumber() + ": " + player2.name());
+            case RUNNING -> gameInfoLabel.setText("Board " + game.boardNumber() + " ...");
+            case DRAW -> gameInfoLabel.setText("Board " + game.boardNumber() + ": patta");
+            case X_WON -> gameInfoLabel.setText("Board "  + game.boardNumber() + ": " + player1.name());
+            case O_WON -> gameInfoLabel.setText("Board "  + game.boardNumber() + ": " + player2.name());
             default -> throw new RuntimeException("Stato partita invalido");
         }
     }

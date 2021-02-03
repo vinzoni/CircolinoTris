@@ -4,7 +4,6 @@ import java.util.List;
 public class TourneamentRound {
 
     public static int GAMES_PER_ROUND = Configuration.players.length / 2;
-    private static int nextGameNumber = 1;
     private static final TourneamentRound firstRound; // Primo turno precalcolato a beneficio dell'inizializzazione della UI.
 
     static {
@@ -24,8 +23,8 @@ public class TourneamentRound {
         for (int i=0; i<GAMES_PER_ROUND; ++i ) {
             Player player1 = pairings.get(i).player1;
             Player player2 = pairings.get(i).player2;
-            Game g = new Game(player1, player2, nextGameNumber);
-            nextGameNumber++;
+            int boardNumber = i + 1;
+            Game g = new Game(player1, player2, boardNumber);
             this.games[i] = g;
         }
     }
