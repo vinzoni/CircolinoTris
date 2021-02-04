@@ -23,57 +23,83 @@ public class Configuration {
             new AIPlayer("Giovanni", new ExaustiveSearchStrategy()),
             new AIPlayer("Giulia", new ExaustiveSearchStrategy()),
 
-            new AIPlayer("Ramona", new RandomStrategy()),
-            new AIPlayer("Rolando", new RandomStrategy()),
-            new AIPlayer("Rosita", new RandomStrategy()),
-            new AIPlayer("Riccardo", new RandomStrategy()),
-            new AIPlayer("Rossana", new RandomStrategy()),
-            new AIPlayer("Rinaldo", new RandomStrategy()),
-            new AIPlayer("Rosa", new RandomStrategy()),
-            new AIPlayer("Raimondo", new RandomStrategy()),
-            new AIPlayer("Romina", new RandomStrategy()),
-            new AIPlayer("Ronaldo", new RandomStrategy()),
-            new AIPlayer("Rebecca", new RandomStrategy()),
-            new AIPlayer("Remigio", new RandomStrategy()),
-            new AIPlayer("Rachele", new RandomStrategy()),
-            new AIPlayer("Rino", new RandomStrategy()),
-            new AIPlayer("Rita", new RandomStrategy()),
-            new AIPlayer("Roy", new RandomStrategy()),
+//            new AIPlayer("Ramona", new RandomStrategy()),
+//            new AIPlayer("Rolando", new RandomStrategy()),
+//            new AIPlayer("Rosita", new RandomStrategy()),
+//            new AIPlayer("Riccardo", new RandomStrategy()),
+//            new AIPlayer("Rossana", new RandomStrategy()),
+//            new AIPlayer("Rinaldo", new RandomStrategy()),
+//            new AIPlayer("Rosa", new RandomStrategy()),
+//            new AIPlayer("Raimondo", new RandomStrategy()),
+//            new AIPlayer("Romina", new RandomStrategy()),
+//            new AIPlayer("Ronaldo", new RandomStrategy()),
+//            new AIPlayer("Rebecca", new RandomStrategy()),
+//            new AIPlayer("Remigio", new RandomStrategy()),
+//            new AIPlayer("Rachele", new RandomStrategy()),
+//            new AIPlayer("Rino", new RandomStrategy()),
+//            new AIPlayer("Rita", new RandomStrategy()),
+//            new AIPlayer("Roy", new RandomStrategy()),
     };
-
-    public static final PairingSystem paringSystem = new PairingSystemRandom();
 
     public static int MIN_MILLIS_INTERVAL_BEETWEEN_AI_MOVES = 1000;
     public static int MIN_MILLIS_INTERVAL_BEETWEEN_ROUNDS = 5000;
 
-    //
-    // UI Configuration for 32 players tourneament
-    //
     public static final int UI_FRAME_WIDTH = 1800;
     public static final int UI_FRAME_HEIGHT = 1000;
-    public static final int UI_BOARD_GRID_ROWS = 3;
-    public static final int UI_BOARD_GRID_COLS = 6;
-    public static final int UI_NUMBER_OF_BOARDS = UI_BOARD_GRID_ROWS * UI_BOARD_GRID_COLS;
-    public static final int UI_BOARD_SIZE = 160;
+    public static final int UI_NUMBER_OF_BOARDS = players.length / 2;
+
     public static final Font UI_BOARD_BUTTON_FONT = new Font("Arial",Font.PLAIN, 30);
     public static final Font UI_NORMAL_TEXT_FONT = new Font("Arial",Font.BOLD, 14);
     public static final Font UI_SMALL_TEXT_FONT = new Font("Arial",Font.PLAIN, 12);
     public static final Font UI_CLOCK_FONT = new Font("Arial",Font.BOLD, 20);
 
+    public static int UI_BOARD_GRID_ROWS;
+    public static int UI_BOARD_GRID_COLS;
+    public static int UI_BOARD_SIZE;
 
-    //
-    // UI Configuration for 16 players tourneament
-    //
-//    public static final int UI_FRAME_WIDTH = 1400;
-//    public static final int UI_FRAME_HEIGHT = 900;
-//    public static final int UI_BOARD_GRID_ROWS = 2;
-//    public static final int UI_BOARD_GRID_COLS = 4;
-//    public static final int UI_NUMBER_OF_BOARDS = UI_BOARD_GRID_ROWS * UI_BOARD_GRID_COLS;
-//    public static final int UI_BOARD_SIZE = 180;
-//    public static final Font UI_BOARD_BUTTON_FONT = new Font("Arial",Font.PLAIN, 30);
-//    public static final Font UI_NORMAL_TEXT_FONT = new Font("Arial",Font.BOLD, 14);
-//    public static final Font UI_SMALL_TEXT_FONT = new Font("Arial",Font.PLAIN, 12);
-//    public static final Font UI_CLOCK_FONT = new Font("Arial",Font.BOLD, 20);
+    public static final PairingSystem paringSystem = new PairingSystemRandom();
+
+    static {
+        switch(UI_NUMBER_OF_BOARDS) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                UI_BOARD_GRID_ROWS = 1;
+                UI_BOARD_GRID_COLS = 4;
+                UI_BOARD_SIZE = 200;
+                break;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                UI_BOARD_GRID_ROWS = 2;
+                UI_BOARD_GRID_COLS = 4;
+                UI_BOARD_SIZE = 200;
+                break;
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+                UI_BOARD_GRID_ROWS = 2;
+                UI_BOARD_GRID_COLS = 6;
+                UI_BOARD_SIZE = 160;
+                break;
+            case 13:
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+                UI_BOARD_GRID_ROWS = 3;
+                UI_BOARD_GRID_COLS = 6;
+                UI_BOARD_SIZE = 160;
+                break;
+            default:
+                if (players.length > 36)
+                    throw new RuntimeException("Too many players (max 36)");
+        }
+    }
 
     //
     // Logging
