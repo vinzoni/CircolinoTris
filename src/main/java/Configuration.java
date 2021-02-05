@@ -100,9 +100,4 @@ public class Configuration {
                     throw new RuntimeException("Too many players (max 36)");
         }
     }
-
-    //
-    // Logging
-    //
-    public static final String LOG_FILENAME = "./data/Torneo_<date>.log";
 }

@@ -12,9 +12,8 @@ public class Logger {
 
     public Logger() {
         try {
-            String filename = Configuration.LOG_FILENAME;
             Date date = new Date();
-            filename = filename.replace("<date>", date.toString());
+            String filename = "./data/Torneo_" + date.toString() + ".log";
             this.writer = new BufferedWriter(new FileWriter(filename));
         } catch (IOException e) {
             e.printStackTrace();
