@@ -19,7 +19,7 @@ public class Tourneament implements Runnable {
                 roundNumber++;
                 tourneamentUI.redraw(roundNumber);
 
-                if (roundNumber == Configuration.MAX_NUMBER_OF_ROUNDS) this.stopGames = true;
+                if (roundNumber == Configuration.tourneamentRounds) this.stopGames = true;
 
                 TourneamentRound tr = TourneamentRound.create(roundNumber);
                 tr.setUIView(tourneamentUI.tourneamentRoundUI());
@@ -34,7 +34,7 @@ public class Tourneament implements Runnable {
             }
         }
         tourneamentUI.redraw(roundNumber);
-        if (roundNumber == Configuration.MAX_NUMBER_OF_ROUNDS)
+        if (roundNumber == Configuration.tourneamentRounds)
             tourneamentUI.closeTourneament(roundNumber);
     }
 

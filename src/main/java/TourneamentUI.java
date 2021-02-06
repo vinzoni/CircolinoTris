@@ -100,7 +100,7 @@ public class TourneamentUI {
     }
 
     private void startGames() throws InterruptedException {
-        Logger.log.logTourneamentStart(Configuration.MAX_NUMBER_OF_ROUNDS, Configuration.players.length);
+        Logger.log.logTourneamentStart(Configuration.tourneamentRounds, Configuration.players.length);
         Thread thread = new Thread(tourneament);
         thread.start();
         clockUI.start();
@@ -109,16 +109,16 @@ public class TourneamentUI {
 
     public void redraw(int roundNumber) {
         String infoRunningRound =
-                Configuration.MAX_NUMBER_OF_ROUNDS == 0
+                Configuration.tourneamentRounds == 0
                         ?
                         "" + roundNumber
                         :
-                        "" + roundNumber + " di "  + Configuration.MAX_NUMBER_OF_ROUNDS;
-        tourneamentInfoLabel.setText(Configuration.TOURNEAMENT_NAME + " - Turno " + infoRunningRound);
+                        "" + roundNumber + " di "  + Configuration.tourneamentRounds;
+        tourneamentInfoLabel.setText(Configuration.tourneamentName + " - Turno " + infoRunningRound);
 
         ratingListUI.redraw();
 
-        if (roundNumber == Configuration.MAX_NUMBER_OF_ROUNDS) newGameButton.setEnabled(false);
+        if (roundNumber == Configuration.tourneamentRounds) newGameButton.setEnabled(false);
 
     }
 
