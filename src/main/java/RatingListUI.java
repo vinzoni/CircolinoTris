@@ -14,52 +14,44 @@ public class RatingListUI {
 
     public RatingListUI() {
 
-        rankingContainerPanel.setLayout(new BoxLayout(rankingContainerPanel, BoxLayout.Y_AXIS));
+        rankingContainerPanel.setLayout(new GridBagLayout());
+        rankingContainerPanel.setPreferredSize(new Dimension(500, 0));
+        rankingContainerPanel.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 0));
 
-        JPanel panelForTitle = new JPanel();
-        JLabel title = new JLabel("RATING LIST");
-        title.setFont(Configuration.UI_NORMAL_TEXT_FONT);
-        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-        panelForTitle.add(title);
-        rankingContainerPanel.add(panelForTitle);
+        createLabel(rankingContainerPanel, "RATING LIST", 1.0, 1, 0);
 
-        JPanel panelForList = new JPanel();
-        panelForList.setLayout(new GridBagLayout());
-        panelForList.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
-
-        createLabel(panelForList, "#", 0.10, 0, 0);
-        createLabel(panelForList, "Giocatore", 0.50, 1, 0);
-        createLabel(panelForList, "Punti", 0.10, 6, 0);
-        createLabel(panelForList, "+", 0.10, 7, 0);
-        createLabel(panelForList, "=", 0.10, 8, 0);
-        createLabel(panelForList, "-", 0.10, 9, 0);
+        createLabel(rankingContainerPanel, "#", 0.10, 0, 1);
+        createLabel(rankingContainerPanel, "Giocatore", 0.50, 1, 1);
+        createLabel(rankingContainerPanel, "Punti", 0.10, 6, 1);
+        createLabel(rankingContainerPanel, "+", 0.10, 7, 1);
+        createLabel(rankingContainerPanel, "=", 0.10, 8, 1);
+        createLabel(rankingContainerPanel, "-", 0.10, 9, 1);
 
         for (int i=0; i<Configuration.players.length; ++i) {
-            createLabel(panelForList, ""+ (i+1) + ".", 0.10, 0, i+1);
-            players[i] = createLabel(panelForList, Configuration.players[i].name(), 0.50, 1, i+1);
-            ratings[i] = createLabel(panelForList, "" + Configuration.players[i].eloRating(), 0.10, 6, i+1);
-            wins[i] = createLabel(panelForList, "" + Configuration.players[i].wins, 0.10, 7, i+1);
-            draws[i] = createLabel(panelForList, "" + Configuration.players[i].draws, 0.10, 8, i+1);
-            losses[i] = createLabel(panelForList, "" + Configuration.players[i].losses, 0.10, 9, i+1);
+            createLabel(rankingContainerPanel, ""+ (i+1) + ".", 0.10, 0, i+2);
+            players[i] = createLabel(rankingContainerPanel, Configuration.players[i].name(), 0.50, 1, i+2);
+            ratings[i] = createLabel(rankingContainerPanel, "" + Configuration.players[i].eloRating(), 0.10, 6, i+2);
+            wins[i] = createLabel(rankingContainerPanel, "" + Configuration.players[i].wins, 0.10, 7, i+2);
+            draws[i] = createLabel(rankingContainerPanel, "" + Configuration.players[i].draws, 0.10, 8, i+2);
+            losses[i] = createLabel(rankingContainerPanel, "" + Configuration.players[i].losses, 0.10, 9, i+2);
         }
-        rankingContainerPanel.add(panelForList);
 
-        JPanel panelForBottomExtraSpace = new JPanel();
-        panelForBottomExtraSpace.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-        rankingContainerPanel.add(panelForBottomExtraSpace);
     }
 
     private JLabel createLabel(JPanel panel, String text, double weightx, int gridx, int gridy) {
-        GridBagConstraints constraints = new GridBagConstraints();
         JLabel label = new JLabel(text);
-        label.setFont(Configuration.UI_NORMAL_TEXT_FONT);
+        label.setHorizontalAlignment(JLabel.LEFT);
+        label.setFont(Configuration.UI_RATING_LIST_FONT);
+
         if (gridy == 0)
+            label.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
+
+        if (gridy == 1)
             label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = weightx;
-        constraints.gridx = gridx;
-        constraints.gridy = gridy;
-        panel.add(label, constraints);
+
+        panel.add(label, new GridBagConstraints(gridx, gridy, 1, 1, weightx, 1.0,
+                GridBagConstraints.NORTH, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
         return label;
     }
 

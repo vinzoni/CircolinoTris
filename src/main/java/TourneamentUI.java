@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class TourneamentUI {
@@ -15,39 +16,37 @@ public class TourneamentUI {
         this.tourneament = tourneament;
         tourneament.setUI_View(this);
 
-        JPanel gamesContainerPanel = tourneamentRoundUI.panel();
-
         JFrame frame = new JFrame();
         frame.setLayout(new java.awt.GridBagLayout());
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = 0.40;
         c.gridx = 0;
         c.gridy = 0;
         JPanel commandPanel = createCommandPanel();
+//        commandPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
         frame.add(commandPanel, c);
 
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.gridx = 1;
+        c.gridx = 4;
         c.gridy = 0;
         JPanel clockPanel = clockUI.panel();
+//        clockPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
         frame.add(clockPanel, c);
 
         c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.WEST;
-        c.weightx = 0.40;
         c.gridx = 0;
         c.gridy = 1;
+        JPanel gamesContainerPanel = tourneamentRoundUI.panel();
+//        gamesContainerPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
         frame.add(gamesContainerPanel, c);
 
         c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.60;
+        c.fill = GridBagConstraints.BOTH;
         c.gridx = 4;
         c.gridy = 1;
+//        ratingListUI.panel().setBorder(BorderFactory.createLineBorder(Color.blue));
         frame.add(ratingListUI.panel(), c);
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -63,7 +62,6 @@ public class TourneamentUI {
     }
 
     private JPanel createCommandPanel() {
-        JPanel commandPanel = new JPanel();
 
         newGameButton.setText("Start Games");
         newGameButton.addActionListener(
@@ -76,7 +74,6 @@ public class TourneamentUI {
                         interruptedException.printStackTrace();
                     }
                 });
-        commandPanel.add(newGameButton);
         lastGameButton.setText("Stop Games");
         lastGameButton.setEnabled(false);
         lastGameButton.addActionListener(
@@ -87,10 +84,24 @@ public class TourneamentUI {
                 });
 
         tourneamentInfoLabel.setFont(Configuration.UI_NORMAL_TEXT_FONT);
-        tourneamentInfoLabel.setBorder(BorderFactory.createEmptyBorder(0, 100, 0, 100));
+        tourneamentInfoLabel.setBorder(new EmptyBorder(0, 20, 0, 20));
         redraw(1);
-        commandPanel.add(tourneamentInfoLabel);
-        commandPanel.add(lastGameButton);
+
+        JPanel commandPanel = new JPanel();
+        commandPanel.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 0.20;
+        commandPanel.add(newGameButton, constraints);
+
+        constraints = new GridBagConstraints();
+        constraints.weightx = 0.60;
+        commandPanel.add(tourneamentInfoLabel, constraints);
+
+        constraints = new GridBagConstraints();
+        constraints.weightx = 0.20;
+        commandPanel.add(lastGameButton, constraints);
+
         return commandPanel;
     }
 

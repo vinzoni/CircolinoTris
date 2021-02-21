@@ -1,4 +1,4 @@
-public class Tourneament32 implements TourneamentConfiguration {
+public class TourneamentConfiguration32Players implements TourneamentConfiguration {
 
     @Override
     public String name() {

@@ -1,4 +1,4 @@
-public class Tourneament16 implements TourneamentConfiguration {
+public class TourneamentConfiguration16Players implements TourneamentConfiguration {
 
     @Override
     public String name() {
